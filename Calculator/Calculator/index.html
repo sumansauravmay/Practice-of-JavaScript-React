@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calculator</title>
+    <style>
+        #main{
+            display: grid;
+            grid-template-rows: repeat(5,80px);
+            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+            margin:auto;
+            width:350px;
+            margin-top: 40px;
+        }
+        #calcultor{
+           display: flex;
+           width:320px;
+           box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+            margin:10px;
+        }
+        #calcultor>div{
+            display: flex;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            width:20px;
+            height:5px;
+            align-items: center;
+            margin: auto;
+            padding:25px;
+            font-size: 25px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #add{
+            background-color: black;
+            color:white;
+        }
+        #subs{
+            background-color: black;
+            color:white;
+        }
+        #mult{
+            background-color: black;
+            color:white;
+        }
+        #equal{
+            background-color: teal;
+            color:white;
+        }
+        #divi{
+            background-color: black;
+            color:white;
+        }
+        #cancel{
+            background-color: red;
+            color:white;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 style="margin-left: 580px;margin-bottom: -20px;color: brown;padding:5px">My Calculator</h1>
+    <div id="main">
+        <div id="calcultor" class="numcal" style="font-size: 25px;display: flex;
+        justify-content: center;margin-top: 35px;">
+            <!-- append your data -->
+        </div>
+        <div id="calcultor">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div id="add">+</div>
+        </div>
+        <div id="calcultor">
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div id="subs">-</div>
+        </div>
+        <div id="calcultor">
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div id="mult">*</div>
+        </div>
+        <div id="calcultor">
+            <div id="cancel">C</div>
+            <div>0</div>
+            <div id="divi">/</div>
+            <div id="equal">=</div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let x=document.querySelectorAll("#calcultor")
+    let bag="";
+    for(let i=0;i<x.length;i++)
+    {
+        x[i].addEventListener("click",mycalculatorfunc)
+    }
+    function mycalculatorfunc(event){
+        let sumanval=event.target.innerText;
+        if(sumanval=="C")
+        {
+            bag="";
+            document.querySelector(".numcal").innerText="";
+        }
+else if(sumanval=="=")
+{
+    if(bag=="")
+    {
+        document.querySelector(".numcal").innerText="";
+    }
+    else{
+        let output=eval(bag)
+    document.querySelector(".numcal").innerText=output;
+    }
+   
+}
+else{
+    bag+=sumanval;
+    document.querySelector(".numcal").innerText=bag;
+}
+    }
+
+</script>
