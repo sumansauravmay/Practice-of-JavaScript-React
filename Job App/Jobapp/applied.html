@@ -1,0 +1,185 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Job</title>
+    <style>
+        #head{
+            display: flex;
+            justify-content: space-around;
+        }
+        select,option{
+            font-size: 20px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        table,th,td{
+            text-align: center;
+            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+        }
+        table{
+            border-collapse:collapse ;
+            width:80%;
+            margin: auto;
+            margin-top: 50px;
+        }
+        th,td{
+            padding:15px;
+        }
+        tr>th{
+            background-color: teal;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div id="head">
+        <div>
+            <a href="index.html">Home</a>
+        </div>
+
+        <div>
+            <a href="applied.html">Applied</a>
+        </div>
+
+        <div>
+            <a href="bookmarks.html">Bookmarks</a>
+        </div>
+    </div>
+
+    <select id="role" onchange="roledatafunc()">
+        <option value="All">All</option>
+        <option value="FSWD">FSWD</option>
+        <option value="Frontend">Frontend</option>
+        <option value="Backend">Backend</option>
+    </select>
+
+    <select id="sortbysalary" onchange="sortdatafunc()">
+        <option value="All">All</option>
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+    </select>
+
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Salary</th>
+                <th>Bookmarks</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- append your data here -->
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>
+
+<script>
+    let jobdatafromls=JSON.parse(localStorage.getItem("job"));
+    let book=[] || JSON.parse(localStorage.getItem("bookmarkdata"));
+    
+function jobdataapplied(jobdatafromls){
+    
+document.querySelector("tbody").innerHTML="";
+
+    jobdatafromls.map((elem)=>{
+
+let tr=document.createElement("tr")
+
+let td1=document.createElement("td")
+td1.innerText=elem.name;
+
+let td2=document.createElement("td")
+td2.innerText=elem.email;
+
+let td3=document.createElement("td")
+td3.innerText=elem.role;
+
+let td4=document.createElement("td")
+td4.innerText=elem.salary;
+
+let td5=document.createElement("td")
+td5.innerText="Bookmarks";
+td5.style.background="green";
+td5.style.cursor="pointer";
+td5.addEventListener("click",function(){
+    bookmarkdata(elem)
+})
+
+let td6=document.createElement("td")
+td6.innerText="Delete";
+td6.style.background="red";
+td6.style.cursor="pointer";
+td6.addEventListener("click",function(){
+    deletedata()
+})
+
+
+
+document.querySelector("tbody").append(tr)
+tr.append(td1,td2,td3,td4,td5,td6)
+    })
+
+}
+jobdataapplied(jobdatafromls)
+
+
+function bookmarkdata(elem){
+book.push(elem)
+localStorage.setItem("bookmarkdata",JSON.stringify(book))
+}
+
+function deletedata(i){
+    jobdatafromls.splice(i,1)
+    localStorage.setItem("job",JSON.stringify(jobdatafromls))
+    window.location.reload();
+}
+
+function roledatafunc(){
+    let roleappliedata=document.querySelector("#role").value;
+    if(roleappliedata=="All")
+    {
+        jobdataapplied(jobdatafromls) 
+    }
+    else{
+        let roleselect=jobdatafromls.filter((elem)=>{
+        return elem.role==roleappliedata;
+    })
+    jobdataapplied(roleselect)
+    }
+    
+}
+
+function sortdatafunc(){
+    let sortapplieddata=document.querySelector("#sortbysalary").value;
+
+// if(sortapplieddata=="All"){
+//     wondow.location.reset();
+// }
+if(sortapplieddata=="Ascending"){
+    let x=jobdatafromls.sort((a,b)=>a.salary-b.salary)
+    jobdataapplied(x)
+}
+else if(sortapplieddata=="Descending"){
+    let y=jobdatafromls.sort((a,b)=>b.salary-a.salary)
+    jobdataapplied(y)
+}
+
+}
+
+
+
+
+
+</script>
+
+

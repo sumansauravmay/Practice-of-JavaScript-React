@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job App</title>
+    <style>
+        form{
+            margin:50px
+        }
+        input,select,option{
+font-size: 20px;
+display: block;
+padding:5px;
+margin:10px;
+        }
+        #submit{
+            width:20%;
+            background-color: aqua;
+            border:0px
+        }
+        #head{
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div id="head">
+        <div>
+            <a href="index.html">Home</a>
+        </div>
+
+        <div>
+            <a href="applied.html">Applied</a>
+        </div>
+
+        <div>
+            <a href="bookmarks.html">Bookmarks</a>
+        </div>
+    </div>
+        <form>
+            <input id="name" type="text" placeholder="enter name"/>
+            <input id="email" type="text" placeholder="enter email"/>
+            <input id="salary" type="number" placeholder="enter salary"/>
+           <select id="role">
+           <option value="FSWD">FSWD</option>
+           <option value="Frontend">Frontend</option>
+           <option value="Backend">Backend</option>
+           </select>
+           <input id="submit" type="submit" value="Add"/>
+        </form>
+   
+</body>
+</html>
+<script>
+document.querySelector("form").addEventListener("submit",myjobfunc)
+
+let jobdata=JSON.parse(localStorage.getItem("job"))||[];
+
+function myjobfunc(){
+
+    let obj={
+        name:document.querySelector("#name").value,
+        email:document.querySelector("#email").value,
+        salary:document.querySelector("#salary").value,
+        role:document.querySelector("#role").value
+    }
+    jobdata.push(obj);
+    localStorage.setItem("job",JSON.stringify(jobdata))
+}
+    
+</script>
