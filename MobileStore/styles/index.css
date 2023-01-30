@@ -1,0 +1,22 @@
+#navbar{
+    display:flex;
+    justify-content: space-between;
+
+  }
+  /* form{
+    width:400px;
+    border:1px solid black;
+  } */
+  form,input{
+    display: block;
+    padding: 10px;
+    margin:10px;
+    border-radius: 10px;
+    
+  }
+  input{
+    width:350px;
+  }
+  #submit{
+    width:370px;
+  }
