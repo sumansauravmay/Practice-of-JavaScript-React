@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+         input{
+font-size: 20px;
+display: block;
+padding:5px;
+margin:10px;
+        }
+        .pagination{
+            margin-top: 20px;
+            text-align: center;
+        }
+        select{
+            padding:5px;
+        }
+        option{
+            padding:5px;
+            font-size: 25px;
+        }
+        #product{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+        }
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <h1>Product Data</h1>
+    <button id="ascending">Ascending</button>
+    <button id="descending">Descending</button>
+
+<select id="selecttag" onchange="handlecategorychangefunc()">
+    <option value="All">All</option>
+    <option value="jewelery">jewelery</option>
+    <option value="electronics">electronics</option>
+    <option value="men's clothing">men's clothing</option>
+    <option value="women's clothing">women's clothing</option>
+</select>
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal_container">
+            <!-- Append ALL the data Here -->
+            <input type="text" placeholder="enter url"/>
+            <input type="text" placeholder="enter title"/>
+            <input type="text" placeholder="enter price"/>
+            <input type="text" placeholder="enter category"/>
+            <button id="confirmfunc">Submit</button>
+        </div>
+    </div>
+</div>
+
+
+    <div id="product"></div>
+
+    <div class="pagination">
+        <button id="prev">Prev</button>
+        <button id="page">1</button>
+        <button id="next">Next</button>
+    </div>
+   
+</body>
+</html>
+<script src="../filejs/product.js"></script>
